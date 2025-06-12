@@ -3,7 +3,7 @@ from enum import Enum
 from functools import lru_cache
 from typing import Optional, Set
 
-from pydantic import AnyHttpUrl, PostgresDsn
+from pydantic import AnyHttpUrl, PostgresDsn, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -15,7 +15,7 @@ class EnvironmentEnum(str, Enum):
 
 
 class GlobalSettings(BaseSettings):
-    PROJECT_NAME: str = "FastAPI Template"
+    PROJECT_NAME: str = "Hey Ceddy - AI Voice Golf Assistant"
     API_V1_STR: str = "/v1"
 
     DOCS_USERNAME: str = "docs_user"
@@ -27,8 +27,25 @@ class GlobalSettings(BaseSettings):
     ENVIRONMENT: EnvironmentEnum
     DEBUG: bool = False
 
-    DATABASE_URL: Optional[PostgresDsn] = "postgresql://user:pass@localhost:5434/my_db"
+    DATABASE_URL: Optional[PostgresDsn] = "postgresql://postgres:12345@localhost:5434/test"
     DB_ECHO_LOG: bool = False
+
+    # OpenAI API settings
+    OPENAI_API_KEY: Optional[
+        SecretStr] = "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"
+    OPENAI_ASSISTANT_ID: Optional[str] = None
+
+    # ElevenLabs API settings (optional)
+    ELEVENLABS_API_KEY: Optional[SecretStr] = None
+    ELEVENLABS_VOICE_ID: Optional[str] = None
+
+    # LiveKit settings
+    LIVEKIT_API_KEY: Optional[SecretStr] = "VFILmIuvAqqLeJA8ZnedcaBCSBztYfCvBOfOXzQchIlA"
+    LIVEKIT_API_SECRET: Optional[SecretStr] = "APIJijrDYRipcYL"
+    LIVEKIT_URL: Optional[str] = "wss: // wyc - cppe36x2.livekit.cloud"
+
+    # Wake word settings
+    WAKE_WORD: str = "Hey Ceddy"
 
     @property
     def async_database_url(self) -> Optional[str]:

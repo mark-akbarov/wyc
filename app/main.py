@@ -25,21 +25,10 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title=settings.PROJECT_NAME,
-    description=description,
-    version=version,
-    lifespan=lifespan,
-    contact={
-        "name": "Jorilla Abdullaev",
-        "url": "https://jorilla.t.me",
-        "email": "jorilla.abdullaev@protonmail.com",
-    },
-    docs_url=None,
-    redoc_url=None,
-    openapi_url=None,
+
 )
 
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.TRUSTED_HOSTS)
+# app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.TRUSTED_HOSTS)
 
 # include routes here
 app.include_router(v1.api_router)
@@ -60,17 +49,6 @@ async def openapi(_: str = Depends(basic_http_credentials)):
     #     "altText": "YOUR BRAND NAME",
     # }
     return schema
-
-
-@app.get(
-    "/docs", include_in_schema=False, dependencies=[Depends(basic_http_credentials)]
-)
-async def get_redoc_documentation():
-    return get_redoc_html(
-        openapi_url="/openapi.json",
-        title="FastAPI | Documentation",
-        # redoc_favicon_url="https://YOUR_WEBSITE/favicon.ico",
-    )
 
 
 app.add_middleware(
