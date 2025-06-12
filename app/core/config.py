@@ -27,7 +27,7 @@ class GlobalSettings(BaseSettings):
     ENVIRONMENT: EnvironmentEnum
     DEBUG: bool = False
 
-    DATABASE_URL: Optional[PostgresDsn] = "postgresql+asyncpg://postgres:12345@localhost:5432/test"
+    DATABASE_URL: Optional[PostgresDsn] = ""
     DB_ECHO_LOG: bool = False
 
     # OpenAI API settings
@@ -40,9 +40,9 @@ class GlobalSettings(BaseSettings):
     ELEVENLABS_VOICE_ID: Optional[str] = None
 
     # LiveKit settings
-    LIVEKIT_API_KEY: Optional[SecretStr] = "VFILmIuvAqqLeJA8ZnedcaBCSBztYfCvBOfOXzQchIlA"
-    LIVEKIT_API_SECRET: Optional[SecretStr] = "APIJijrDYRipcYL"
-    LIVEKIT_URL: Optional[str] = "wss: // wyc - cppe36x2.livekit.cloud"
+    LIVEKIT_API_KEY: Optional[SecretStr] = ""
+    LIVEKIT_API_SECRET: Optional[SecretStr] = ""
+    LIVEKIT_URL: Optional[str] = ""
 
     # Wake word settings
     WAKE_WORD: str = "Hey Ceddy"
