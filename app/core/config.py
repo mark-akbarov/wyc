@@ -32,7 +32,7 @@ class GlobalSettings(BaseSettings):
 
     # OpenAI API settings
     OPENAI_API_KEY: Optional[
-        SecretStr] = "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"
+        SecretStr] = ""
     OPENAI_ASSISTANT_ID: Optional[str] = None
 
     # ElevenLabs API settings (optional)
