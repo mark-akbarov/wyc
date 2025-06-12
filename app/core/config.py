@@ -27,12 +27,12 @@ class GlobalSettings(BaseSettings):
     ENVIRONMENT: EnvironmentEnum
     DEBUG: bool = False
 
-    DATABASE_URL: Optional[PostgresDsn] = "postgresql://postgres:12345@localhost:5434/test"
+    DATABASE_URL: Optional[PostgresDsn] = "postgresql+asyncpg://postgres:12345@localhost:5432/test"
     DB_ECHO_LOG: bool = False
 
     # OpenAI API settings
     OPENAI_API_KEY: Optional[
-        SecretStr] = "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"
+        SecretStr] = "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"
     OPENAI_ASSISTANT_ID: Optional[str] = None
 
     # ElevenLabs API settings (optional)

@@ -1,7 +1,7 @@
 import uuid
 from typing import List, Optional
 
-from fastapi import APIRouter, HTTPException, status, UploadFile, File, Body, Header, Request
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Body, Header, Request
 from fastapi.responses import StreamingResponse
 
 from api.dependencies.database import DbSessionDep
@@ -14,6 +14,7 @@ from schemas.golf_assistant import (
     PaginatedGolfSessionSchema,
     UpdateGolfSessionSchema,
     InGolfTranscriptSchema,
+    OutGolfTranscriptSchema,
     PaginatedGolfTranscriptSchema,
     UpdateGolfTranscriptSchema,
     # LiveKit schemas
@@ -34,6 +35,7 @@ from services.tts_service import text_to_speech
 from services.livekit_service import (
     create_access_token,
     create_room,
+    delete_room,
     list_rooms,
     get_room_participants,
     validate_webhook,
@@ -210,7 +212,6 @@ async def suggest_club(
     """
     Suggest a golf club based on distance
     """
-    # This is a simple implementation that would be replaced with a call to the OpenAI Assistant
     if distance < 100:
         return {"club": "Wedge", "explanation": "For short distances under 100 yards, a wedge is appropriate."}
     elif distance < 150:
@@ -218,8 +219,7 @@ async def suggest_club(
     elif distance < 180:
         return {"club": "7 Iron", "explanation": "For distances between 150-180 yards, a 7 iron is recommended."}
     elif distance < 220:
-        return {"club": "5 Iron",
-                "explanation": "For distances between 180-220 yards, a 5 iron provides good distance."}
+        return {"club": "5 Iron", "explanation": "For distances between 180-220 yards, a 5 iron provides good distance."}
     else:
         return {"club": "Driver", "explanation": "For distances over 220 yards, use your driver for maximum distance."}
 
